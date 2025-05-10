@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../controllers/controllers_mixin.dart';
 import '../extensions/extensions.dart';
 import '../model/work_time_summary_model.dart';
+import 'monthly_worktime_screen.dart';
+import 'parts/worktime_dialog.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -105,7 +107,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with ControllersMixin<H
 
                                     const SizedBox(height: 10),
 
-                                    Icon(Icons.input, color: Colors.white.withValues(alpha: 0.4)),
+                                    GestureDetector(
+                                      onTap: () {
+                                        workTimeMonthlyNotifier.setSelectedDate(
+                                          date: '$e-${(e2 + 1).toString().padLeft(2, '0')}-01',
+                                        );
+
+                                        workTimeDialog(
+                                          context: context,
+                                          widget: MonthlyWorktimeScreen(
+                                            yearmonth: '$e-${(e2 + 1).toString().padLeft(2, '0')}',
+                                          ),
+                                        );
+                                      },
+
+                                      child: Icon(Icons.input, color: Colors.white.withValues(alpha: 0.4)),
+                                    ),
                                   ],
                                 ),
 
