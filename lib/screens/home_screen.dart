@@ -105,24 +105,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with ControllersMixin<H
                                   children: <Widget>[
                                     Text((e2 + 1).toString().padLeft(2, '0')),
 
-                                    const SizedBox(height: 10),
+                                    if (data != null && data.workSum.split('.')[0].toInt() > 0) ...<Widget>[
+                                      const SizedBox(height: 10),
 
-                                    GestureDetector(
-                                      onTap: () {
-                                        workTimeMonthlyNotifier.setSelectedDate(
-                                          date: '$e-${(e2 + 1).toString().padLeft(2, '0')}-01',
-                                        );
+                                      GestureDetector(
+                                        onTap: () {
+                                          workTimeMonthlyNotifier.setSelectedDate(
+                                            date: '$e-${(e2 + 1).toString().padLeft(2, '0')}-01',
+                                          );
 
-                                        workTimeDialog(
-                                          context: context,
-                                          widget: MonthlyWorktimeScreen(
-                                            yearmonth: '$e-${(e2 + 1).toString().padLeft(2, '0')}',
-                                          ),
-                                        );
-                                      },
+                                          workTimeDialog(
+                                            context: context,
+                                            widget: MonthlyWorktimeScreen(
+                                              yearmonth: '$e-${(e2 + 1).toString().padLeft(2, '0')}',
+                                            ),
+                                          );
+                                        },
 
-                                      child: Icon(Icons.input, color: Colors.white.withValues(alpha: 0.4)),
-                                    ),
+                                        child: Icon(Icons.input, color: Colors.white.withValues(alpha: 0.4)),
+                                      ),
+                                    ],
                                   ],
                                 ),
 
